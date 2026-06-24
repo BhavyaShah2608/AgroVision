@@ -74,6 +74,30 @@ Because the frontend connects to local APIs and Firebase services, it is best to
 
 ---
 
+## 🌐 Production Deployment
+
+To deploy the fully functioning web application online for free:
+
+### 1. Frontend (Netlify / Vercel)
+- Deploy your GitHub repository to a hosting platform like **Netlify** or **Vercel**.
+- Set the **Base directory** to `Frontend` (capital `F`).
+- Leave the **Build command** blank.
+- Set the **Publish directory** to `.` (or leave it blank).
+
+### 2. Backend API (Hugging Face Spaces)
+The backend model weights file (`plant_disease_prediction_model.h5` ~573MB) is too large for GitHub's 100MB file limit. Use **Hugging Face Spaces** (which offers a free 16GB RAM tier) to host it:
+1. Create a free account on [Hugging Face](https://huggingface.co/).
+2. Create a **New Space**, choose **Docker** as the SDK, and select the **Blank** template.
+3. Upload the files inside your local `Backend/` folder directly to the Space repository:
+   * `server.py`
+   * `diseases.json`
+   * `requirements.txt`
+   * `Dockerfile` (automatically configures the server for port 7860)
+   * `plant_disease_prediction_model.h5` (your model weights, uploaded directly to Hugging Face)
+4. Update the backend URL in `Frontend/js/dropdownImage.js` and `Frontend/js/predictions.js` to point to your live Hugging Face Space URL, then push the change to GitHub to trigger Netlify to redeploy.
+
+---
+
 ## 📊 Dataset Reference
 This project was trained using the [PlantVillage dataset](https://www.kaggle.com/datasets/emmarex/plantdisease), consisting of thousands of healthy and diseased crop leaves across 38 distinct classes.
 
