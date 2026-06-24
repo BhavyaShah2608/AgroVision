@@ -80,7 +80,7 @@ function uploadImage(file) {
 			let { disease } = result;
 			let diseaseName = disease;
 			diseaseName = diseaseName.replace(/_/g, ' ');
-			const detailsUrl = `${window.location.origin}/Frontend/predictions.html?disease=${disease}`;
+			const detailsUrl = `${window.location.origin}/predictions.html?disease=${disease}`;
 
 			if (window.AgroVisionAuth) {
 				window.AgroVisionAuth.ready().then(() => {
