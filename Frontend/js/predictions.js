@@ -45,7 +45,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		});
 	}
 
-	return fetch('http://localhost:5001/diseasedetail', {
+	return fetch('https://bhavyashah2608-agrovision-backend.hf.space/diseasedetail', {
 		method: 'POST',
 		body: formData,
 	})

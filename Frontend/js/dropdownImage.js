@@ -71,7 +71,7 @@ function uploadImage(file) {
 	//     .catch((error) =>
 	//       console.error("Error uploading image to Cloudinary:", error)
 	//     );
-	return fetch('http://localhost:5001/upload', {
+	return fetch('https://bhavyashah2608-agrovision-backend.hf.space/upload', {
 		method: 'POST',
 		body: formData,
 	})
