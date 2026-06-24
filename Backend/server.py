@@ -85,6 +85,9 @@ model = load_model('plant_disease_prediction_model.h5')
 app = Flask(__name__)
 CORS(app)
 
+# Ensure the upload folder exists
+os.makedirs('uploaded_images', exist_ok=True)
+
 
 @app.route('/')
 def hello_world():
