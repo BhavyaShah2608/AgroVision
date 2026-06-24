@@ -30,6 +30,9 @@ Follow these steps to run the backend and frontend locally on Windows.
 
 The backend includes a pre-configured Python virtual environment (`venv`) with TensorFlow, Flask, and all necessary dependencies.
 
+> [!IMPORTANT]
+> Because the model weights file is too large for GitHub, you must first **[download the plant_disease_prediction_model.h5 file (573MB)](https://huggingface.co/spaces/bhavyashah2608/agrovision-backend/resolve/main/plant_disease_prediction_model.h5)** and place it directly inside the `Backend/` directory.
+
 1. Open your terminal (PowerShell, Command Prompt, or Git Bash) and navigate to the project directory.
 2. Run the following commands:
 
