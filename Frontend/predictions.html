@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Disease Prediction</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap">
+
+  <link id="style-switch" rel="stylesheet" type="text/css" href="css/predictions.css">
+
+  <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
+  <style>
+    .prediction-history {
+      margin: 1rem 0 2rem;
+    }
+
+    .prediction-history__card {
+      background: #fff;
+      border-radius: 1rem;
+      padding: 1rem;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+      display: grid;
+      gap: 0.35rem;
+    }
+
+    .prediction-history__label {
+      font-size: 0.85rem;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .prediction-history__name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .prediction-history__meta {
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+
+    .prediction-history__link {
+      color: #166534;
+      font-weight: 600;
+    }
+  </style>
+
+</head>
+
+<body>
+  <main>
+    <br>
+
+    <div class="container prediction-history">
+      <div class="prediction-history__card">
+        <span class="prediction-history__label">Last search on this device</span>
+        <strong class="prediction-history__name" id="last-search-name">Loading...</strong>
+        <span class="prediction-history__meta" id="last-search-meta">Waiting for your saved disease history.</span>
+        <a class="prediction-history__link" id="last-search-link" href="#" hidden>Open saved disease details</a>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row g-4">
+        <div class=" vstack gap-4">
+          <div class="card">
+            <div class="h-200px rounded-top " id="prediction-image"
+              style="background-image:url(img/05.jpg); background-position: center; background-size: cover; background-repeat: no-repeat;">
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header border-0 pb-0">
+              <div class="d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                  <div>
+                    <h3 class="nav-item card-title mb-0"  id="prediction-name">  Prediction </h3>
+                    <br>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header border-0 pb-0">
+              <div class="d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                  <div>
+                    <h3 class="nav-item card-title mb-0"  >  Prediction </h3>
+                    <br>
+                    <ul id="prediction-desc">dddddd</ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+                <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+                <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+                <script src="./js/firebase-config.js" defer></script>
+                <script src="./js/auth.js" defer></script>
+                <script src="./js/predictions.js" defer> </script>
+</body>
+</html>

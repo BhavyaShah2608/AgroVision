@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css">
+    <title>AgroVision Sign In</title>
+</head>
+
+<body class="auth-page">
+    <main class="main">
+        <section class="auth auth--page" id="auth-panel">
+            <div class="auth__layout">
+                <div class="auth__card">
+                    <div class="auth__topbar">
+                        <i class="ri-moon-line change-theme" id="theme-button"></i>
+                        <button class="auth__close" id="open-app-button" type="button" aria-label="Close sign in">
+                            <i class="ri-close-line"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="auth__title">Sign in</h1>
+                    <div class="auth__status" id="auth-message">Sign in to continue.</div>
+                    <button class="nav__auth-button nav__auth-button--ghost auth__open-app" id="open-app-link-button" type="button">Open app without sign in</button>
+
+                    <div class="auth__social-list">
+                        <button class="auth__social-button" id="google-signin-button" type="button">
+                            <i class="ri-google-fill"></i>
+                            Continue with Google
+                        </button>
+                    </div>
+
+                    <div class="auth__divider" aria-hidden="true">or</div>
+
+                    <form class="auth__form" id="email-signin-form">
+                        <div class="auth__field">
+                            <i class="ri-mail-line auth__field-icon"></i>
+                            <input type="email" id="auth-email" placeholder="Your email" required>
+                        </div>
+                        <div class="auth__field">
+                            <i class="ri-lock-2-line auth__field-icon"></i>
+                            <input type="password" id="auth-password" placeholder="Your password" required>
+                        </div>
+                        <button class="button button--flex auth__login" type="submit" data-auth-action="sign-in">Sign in</button>
+                    </form>
+
+                    <p class="auth__register-text">
+                        Don't have an account?
+                        <button class="auth__register-link" type="button" id="create-account-button">Create account</button>
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+    <script src="js/scroll.min.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

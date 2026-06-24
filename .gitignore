@@ -1,0 +1,56 @@
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+.venv/
+plantex_env/
+Backend/venv/
+.env
+.env.*
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Flutter / Dart
+.dart_tool/
+.packages
+.pub/
+build/
+flutter_*.png
+
+# Android / iOS / desktop build outputs
+**/android/app/debug/
+**/android/app/profile/
+**/android/app/release/
+**/ios/Flutter/Flutter.framework/
+**/ios/Flutter/App.framework/
+**/macos/Flutter/ephemeral/
+**/linux/flutter/ephemeral/
+**/windows/flutter/ephemeral/
+
+# Project-specific generated assets and local data
+Backend/uploaded_images/
+Backend/plantvillage dataset/
+Backend/model1_testing/
+Backend/run_deit_better/
+Backend/run_deit_strong/
+Backend/ensemble_artifacts/
+Backend/ensemble_artifacts_fast/
+Backend/*.h5
+Backend/*.pt
+Backend/*.pth
+Backend/*.onnx
+Backend/*.tflite
+Backend/*.zip
+Backend/kaggle.json
+
+# Exclude the Flutter mobile/Android app directory
+app/
