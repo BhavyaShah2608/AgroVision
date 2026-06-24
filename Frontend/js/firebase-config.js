@@ -1,8 +1,8 @@
 window.__FIREBASE_CONFIG__ = window.__FIREBASE_CONFIG__ || {
-	apiKey: 'AIzaSyCgt2wkiGy_4djrIQrXhVEVDoFH78FycIw',
-	authDomain: 'agrovision-c0b3e.firebaseapp.com',
-	projectId: 'agrovision-c0b3e',
-	storageBucket: 'agrovision-c0b3e.firebasestorage.app',
-	messagingSenderId: '1021811915239',
-	appId: '1:1021811915239:web:cc22f299600e996c8de542',
+	apiKey: 'REPLACE_API_KEY',
+	authDomain: 'REPLACE_AUTH_DOMAIN',
+	projectId: 'REPLACE_PROJECT_ID',
+	storageBucket: 'REPLACE_STORAGE_BUCKET',
+	messagingSenderId: 'REPLACE_MESSAGING_SENDER_ID',
+	appId: 'REPLACE_APP_ID',
 };
