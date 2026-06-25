@@ -550,7 +550,7 @@
                 $('#typing_indicator').fadeIn(150);
                 
                 let pretext = `Act as Ai chatbot of AgroVision and help users to seek knowledge and answers related to their questions. Answer the following query properly, and remember you are AgroVision AI chatbot. \nFollwoing is the query - ${message}`;
-                const response = await genAI.getGenerativeModel({ model: "gemini-2.5-flash" }).generateContent(pretext);
+                const response = await genAI.getGenerativeModel({ model: "gemini-3.1-flash-lite" }).generateContent(pretext);
                 const botResponse = await response.response.text();
                 
                 // Hide typing indicator
