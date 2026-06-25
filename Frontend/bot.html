@@ -2,67 +2,481 @@
 <html lang="en">
 
 <head>
-    
-        
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-<link href="C:/Users/heerm/Algorithms-Visualization/assets2/css/style.css" rel="stylesheet">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://kit.fontawesome.com/a658a7b479.js" crossorigin="anonymous"></script>
-<link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
-
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-    <link rel="stylesheet" href=".Frontend/css/style.css">
-</head>
-    <!-- SEO related -->
-
-    <!-- Meta related -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Chatbot</title>
+    <title>AgroVision AI Assistant</title>
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
 
-    <!-- Vendor CSS & style files -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300|Open+Sans:300|Oxygen|Material+Icons"
-        rel="stylesheet">
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Vendor Styles -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    
+    <style>
+        /* ==========================================================================
+           AgroVision Premium Design System Tokens (HSL-based)
+           ========================================================================== */
+        :root {
+            --primary-hue: 152;
+            --primary-sat: 24%;
+            --primary-light: 32%; /* Forest Green */
+            
+            --brand-primary: hsl(var(--primary-hue), var(--primary-sat), var(--primary-light));
+            --brand-primary-hover: hsl(var(--primary-hue), var(--primary-sat), 25%);
+            --brand-light-sage: hsl(var(--primary-hue), 20%, 94%);
+            --brand-mint: hsl(150, 60%, 45%);
+            
+            /* Layout colors */
+            --bg-page: radial-gradient(circle at top left, hsl(140, 15%, 93%), hsl(150, 10%, 85%));
+            --bg-card: rgba(255, 255, 255, 0.95);
+            --border-card: rgba(62, 101, 83, 0.25);
+            --shadow-card: 0 30px 60px rgba(0, 0, 0, 0.12), 0 2px 10px rgba(0, 0, 0, 0.04);
+            
+            /* Message bubble colors */
+            --bg-msg-bot: #f1f5f3;
+            --text-msg-bot: #2c3e35;
+            --bg-msg-user: linear-gradient(135deg, hsl(152, 24%, 32%), hsl(152, 24%, 24%));
+            --text-msg-user: #ffffff;
+            
+            --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="css/bot.css">
-  
+        /* ==========================================================================
+           Base resets & layouts
+           ========================================================================== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--bg-page);
+            color: #2b3a32;
+            font-family: var(--font-sans);
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        main.main {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* ==========================================================================
+           Chat window container
+           ========================================================================== */
+        .chat_window {
+            width: 100%;
+            max-width: 600px;
+            height: 85vh;
+            max-height: 800px;
+            background-color: var(--bg-card);
+            border: 2px solid var(--border-card);
+            border-radius: 24px;
+            box-shadow: var(--shadow-card);
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* ==========================================================================
+           Header (Top Menu) Styling
+           ========================================================================== */
+        .top_menu {
+            background: #ffffff;
+            border-bottom: 1.5px solid rgba(62, 101, 83, 0.15);
+            padding: 16px 24px;
+            flex-shrink: 0;
+        }
+
+        .header_content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .status_indicator {
+            width: 10px;
+            height: 10px;
+            position: relative;
+        }
+
+        .status_dot {
+            display: block;
+            width: 100%;
+            height: 100%;
+            background-color: var(--brand-mint);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--brand-mint);
+        }
+
+        .status_indicator::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--brand-mint);
+            border-radius: 50%;
+            animation: statusPulse 2s infinite ease-in-out;
+        }
+
+        .header_text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top_menu .title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--brand-primary);
+            line-height: 1.2;
+        }
+
+        .top_menu .subtitle {
+            font-size: 12px;
+            color: #6d7e74;
+            font-weight: 500;
+            margin-top: 2px;
+        }
+
+        /* ==========================================================================
+           Messages Area
+           ========================================================================== */
+        .messages {
+            list-style: none;
+            padding: 24px;
+            margin: 0;
+            flex-grow: 1;
+            min-height: 0;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background: #fafbfc;
+        }
+
+        /* Custom Scrollbar */
+        .messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .messages::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .messages::-webkit-scrollbar-thumb {
+            background: rgba(62, 101, 83, 0.2);
+            border-radius: 10px;
+        }
+
+        .messages::-webkit-scrollbar-thumb:hover {
+            background: rgba(62, 101, 83, 0.4);
+        }
+
+        /* Message Item Layout */
+        .messages .message {
+            display: flex;
+            align-items: flex-end;
+            gap: 12px;
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity 0.35s ease, transform 0.35s ease;
+        }
+
+        .messages .message.appeared {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Avatar Styling */
+        .messages .message .avatar {
+            height: 36px;
+            width: 36px;
+            border-radius: 50%;
+            background-size: cover !important;
+            flex-shrink: 0;
+            border: 1.5px solid rgba(62, 101, 83, 0.15);
+        }
+
+        .messages .message.left .avatar {
+            background-image: url('img/bot.png'); /* fallback image path */
+            background-color: #e2e8f0;
+            order: 1;
+        }
+
+        .messages .message.right .avatar {
+            background-image: url('img/guy.png'); /* fallback image path */
+            background-color: #cbd5e1;
+            order: 2;
+        }
+
+        /* Text Wrapper */
+        .messages .message .text_wrapper {
+            max-width: calc(100% - 64px);
+            padding: 14px 18px;
+            border-radius: 18px;
+            position: relative;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+        }
+
+        .messages .message.left .text_wrapper {
+            background: var(--bg-msg-bot);
+            color: var(--text-msg-bot);
+            border-bottom-left-radius: 4px;
+            order: 2;
+            border: 1px solid rgba(62, 101, 83, 0.1);
+        }
+
+        .messages .message.right .text_wrapper {
+            background: var(--bg-msg-user);
+            color: var(--text-msg-user);
+            border-bottom-right-radius: 4px;
+            order: 1;
+            margin-left: auto;
+        }
+
+        /* Text Formatting Styles */
+        .messages .message .text {
+            font-size: 14.5px;
+            line-height: 1.5;
+            word-wrap: break-word;
+        }
+
+        .messages .message .text p {
+            margin-bottom: 8px;
+        }
+
+        .messages .message .text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .messages .message .text ul,
+        .messages .message .text ol {
+            margin: 8px 0 8px 20px;
+        }
+
+        .messages .message .text li {
+            margin-bottom: 4px;
+        }
+
+        .messages .message .text strong {
+            font-weight: 700;
+        }
+
+        /* Timestamp */
+        .messages .message .timestamp {
+            font-size: 10px;
+            margin-top: 6px;
+            display: block;
+        }
+
+        .messages .message.left .timestamp {
+            text-align: left;
+            color: #8c9e94;
+        }
+
+        .messages .message.right .timestamp {
+            text-align: right;
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        /* ==========================================================================
+           Typing Indicator Animation
+           ========================================================================== */
+        .typing_indicator {
+            display: flex;
+            gap: 5px;
+            padding: 12px 18px;
+            background: var(--bg-msg-bot);
+            border-radius: 18px;
+            border-bottom-left-radius: 4px;
+            width: fit-content;
+            margin-left: 72px;
+            margin-bottom: 16px;
+            border: 1px solid rgba(62, 101, 83, 0.1);
+            position: absolute;
+            bottom: 76px;
+            z-index: 10;
+        }
+
+        .typing_indicator .dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--brand-primary);
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out both;
+            opacity: 0.6;
+        }
+
+        .typing_indicator .dot:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+
+        .typing_indicator .dot:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+
+        /* ==========================================================================
+           Chat Input Section
+           ========================================================================== */
+        .bottom_wrapper {
+            background: #ffffff;
+            border-top: 1.5px solid rgba(62, 101, 83, 0.15);
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        .bottom_wrapper #msg_input {
+            flex-grow: 1;
+            border: 1.5px solid rgba(62, 101, 83, 0.15);
+            background: #ffffff;
+            padding: 12px 20px;
+            border-radius: 24px;
+            font-size: 14.5px;
+            font-family: var(--font-sans);
+            color: var(--brand-primary);
+            outline: none;
+            transition: all 0.25s ease;
+        }
+
+        .bottom_wrapper #msg_input::placeholder {
+            color: #9cb0a4;
+        }
+
+        .bottom_wrapper #msg_input:focus {
+            border-color: var(--brand-primary);
+            box-shadow: 0 0 0 3px rgba(62, 101, 83, 0.1);
+        }
+
+        .send_button {
+            height: 44px;
+            width: 44px;
+            background: var(--brand-primary);
+            color: #ffffff;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(62, 101, 83, 0.25);
+            transition: all 0.25s ease;
+            flex-shrink: 0;
+        }
+
+        .send_button:hover {
+            background: var(--brand-primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(62, 101, 83, 0.35);
+        }
+
+        .send_button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 6px rgba(62, 101, 83, 0.25);
+        }
+
+        .send_button svg {
+            fill: #ffffff;
+        }
+
+        /* ==========================================================================
+           Animations Keyframes
+           ========================================================================== */
+        @keyframes statusPulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(2.4);
+                opacity: 0;
+            }
+        }
+
+        @keyframes bounce {
+            0%, 80%, 100% { 
+                transform: scale(0);
+            }
+            40% { 
+                transform: scale(1.0);
+            }
+        }
+    </style>
 </head>
 
-<body style="background-color: white;">
-   
+<body>
     <main class="main">
-
-
-    <div class="container">
-        <div class="row padded_row">
-            <!-- Right side content -->
-            <div class="col-md-7">
-                <div class="chat_window">
-                    <div class="top_menu">
-                        <div class="title" style="color: rgba(62,101,83,255);">AgroVision Chatbot</div>
-                    </div>
-                    <!-- Dynamically rendered -->
-                    <ul class="messages"></ul>
-                    <!-- Input -->
-                    <div class="bottom_wrapper">
-                        <input id="msg_input" placeholder="Say Hi to begin chat..." />
-                        <div id="send_button" class="app_button_1">Send</div>
+        <div class="container">
+            <div class="chat_window">
+                <!-- Header -->
+                <div class="top_menu">
+                    <div class="header_content">
+                        <div class="status_indicator">
+                            <span class="status_dot"></span>
+                        </div>
+                        <div class="header_text">
+                            <div class="title">AgroVision AI Assistant</div>
+                            <div class="subtitle">Garden & Plant Expert • Online</div>
+                        </div>
                     </div>
                 </div>
+                
+                <!-- Messages List -->
+                <ul class="messages"></ul>
+                
+                <!-- Typing Indicator -->
+                <div class="typing_indicator" id="typing_indicator" style="display: none;">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+
+                <!-- Input area -->
+                <div class="bottom_wrapper">
+                    <input id="msg_input" autocomplete="off" placeholder="Ask a gardening question..." />
+                    <button id="send_button" class="send_button" aria-label="Send message">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+                            <path d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-6.054-2.685z"/>
+                        </svg>
+                    </button>
+                </div>
             </div>
-            <!-- Left side content -->
-           
-    </div>
+        </div>
+    </main>
 
     <!-- Vendor script files -->
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js">
-    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
     <!-- Google Generative AI import map -->
     <script type="importmap">
@@ -79,7 +493,7 @@
         import { GoogleGenerativeAI } from "@google/generative-ai";
 
         // Fetch your API_KEY
-        const API_KEY = "REPLACE_GEMINI_API_KEY";//put ur own api key
+        const API_KEY = "AIzaSyBCvaYebDGpYI0Yc2U7ehm17a7sNom8EUk";//put ur own api key
 
         // Access your API key
         const genAI = new GoogleGenerativeAI(API_KEY);
@@ -122,7 +536,7 @@
 
         async function showBotMessage(message, datetime) {
             // Convert message to markdown for proper formatting
-            let formattedMessage = `${message}`;
+            let formattedMessage = marked.parse(message);
             renderMessageToScreen({
                 text: formattedMessage,
                 time: datetime,
@@ -132,18 +546,27 @@
 
         async function sendUserMessage(message) {
             try {
-                let pretext = `Act as Ai chatbot of AgroVision and help users to seek knowledge and answers related to their questions. Answer the following query properly, and remember you are AgroVision AI chatbot. \nFollwoing is the query - ${message}`
-                const response = await genAI.getGenerativeModel({ model: "gemini-pro" }).generateContent(pretext);
+                // Show typing indicator
+                $('#typing_indicator').fadeIn(150);
+                
+                let pretext = `Act as Ai chatbot of AgroVision and help users to seek knowledge and answers related to their questions. Answer the following query properly, and remember you are AgroVision AI chatbot. \nFollwoing is the query - ${message}`;
+                const response = await genAI.getGenerativeModel({ model: "gemini-2.5-flash" }).generateContent(pretext);
                 const botResponse = await response.response.text();
+                
+                // Hide typing indicator
+                $('#typing_indicator').hide();
+                
                 await showBotMessage(botResponse);
             } catch (error) {
                 console.error("Error fetching bot response:", error);
+                $('#typing_indicator').hide();
                 await showBotMessage("I'm sorry, I couldn't process your request at the moment.");
             }
         }
 
         $('#send_button').on('click', async function (e) {
             var userInput = $('#msg_input').val();
+            if (!userInput.trim()) return;
             await showUserMessage(userInput);
             $('#msg_input').val('');
             await sendUserMessage(userInput);
